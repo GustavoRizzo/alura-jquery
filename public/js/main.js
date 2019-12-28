@@ -16,3 +16,19 @@ campo.on("input", function() {
     var qtdCaracteres = conteudo.length;
     $("#contador-caracteres").text(qtdCaracteres);
 });
+
+var tempoRestante = 5;
+$("#tempo-digitacao").text(tempoRestante);
+
+campo.one("focus", function() {
+    console.log("focado");
+    var cronometroID = setInterval(function() {
+        console.log("loppando");
+        tempoRestante--;
+        $("#tempo-digitacao").text(tempoRestante);
+        if (tempoRestante < 1){
+            campo.attr("disabled", true);
+            clearInterval(cronometroID);
+        }
+    },1000);
+});
